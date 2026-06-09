@@ -1,13 +1,12 @@
 import React from 'react'
 import Navbar from '../../components/Navbar'
 
-function Subscription() {
+function Userdashboard() {
   return (
     <div>
-        <Navbar />
-      <h1>Subscription pages</h1>
+      <Navbar/>
     </div>
   )
 }
 
-export default Subscription
+export default Userdashboard

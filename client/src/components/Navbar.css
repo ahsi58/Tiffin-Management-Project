@@ -80,3 +80,39 @@
 .dropdown:hover .dropdown-content {
   display: flex;
 }
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ff6b35;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.role-text {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.logout-btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  background-color: crimson;
+  color: white;
+}

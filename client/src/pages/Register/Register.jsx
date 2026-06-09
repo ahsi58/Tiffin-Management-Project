@@ -143,6 +143,7 @@ function Register() {
                 onChange={handleChange}
               >
                 <option value="user">User</option>
+                <option value="user">Member</option>
                 <option value="vendor">Vendor</option>
               </select>
             </div>

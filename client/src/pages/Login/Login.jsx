@@ -1,21 +1,65 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import { useNavigate } from "react-router-dom";
 // import Footer from "../../components/Footer";
 import "./Login.css";
 
 function Login() {
+  const navigate = useNavigate();
+
+  const users = [
+  {
+    email: "user@gmail.com",
+    password: "user123",
+    role: "user",
+  },
+  {
+    email: "member@gmail.com",
+    password: "member123",
+    role: "member",
+  },
+  {
+    email: "vendor@gmail.com",
+    password: "vendor123",
+    role: "vendor",
+  },
+];
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    console.log({
-      email,
-      password,
-    });
-  };
+  const foundUser = users.find(
+    (user) =>
+      user.email === email &&
+      user.password === password
+  );
+
+  if (!foundUser) {
+    alert("Invalid credentials");
+    return;
+  }
+
+  localStorage.setItem(
+  "currentUser",
+  JSON.stringify(foundUser)
+  );
+
+  if (foundUser.role === "user") {
+    navigate("/user-dashboard");
+  }
+
+  else if (foundUser.role === "member") {
+    navigate("/member-dashboard");
+  }
+
+  else if (foundUser.role === "vendor") {
+    navigate("/vendor-dashboard");
+  }
+};
 
   return (
     <>

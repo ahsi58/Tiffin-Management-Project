@@ -4,6 +4,16 @@ import "./Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate()
+
+  const currentUser = JSON.parse(
+  localStorage.getItem("currentUser")
+  );
+
+  const handleLogout = () => {
+    localStorage.removeItem("currentUser");
+    navigate("/");
+  };
+
   return (
     <nav className="navbar">
       {/* Left Side */}
@@ -20,14 +30,42 @@ function Navbar() {
           <span>Weekly Menu ▾</span>
 
           <div className="dropdown-content">
-            <Link to="/subscription/lunch">Lunch</Link>
-            <Link to="/subscription/dinner">Dinner</Link>
+            <Link to="/menu/lunch">Lunch</Link>
+            <Link to="/menu/dinner">Dinner</Link>
           </div>
         </div>
 
         <Link to="/subscription">Subscription</Link>
 
-        <button className="button-btn" onClick={() => navigate("/login")}>Login/Signup</button>
+        {
+          currentUser ? (
+            <div className="user-section">
+
+              <div className="profile-circle">
+                {currentUser.role[0].toUpperCase()}
+              </div>
+
+              <span className="role-text">
+                {currentUser.role}
+              </span>
+
+              <button
+                className="logout-btn"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+
+            </div>
+          ) : (
+            <button
+              className="button-btn"
+              onClick={() => navigate("/login")}
+            >
+              Login / Signup
+            </button>
+          )
+        }
         {/* <Link to="/login">Login / Signup</Link> */}
       </div>
     </nav>
