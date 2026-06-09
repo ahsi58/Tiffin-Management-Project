@@ -1,0 +1,31 @@
+.menu-page {
+  min-height: 100vh;
+  background: #faf6ef;
+  padding: 40px;
+}
+
+.menu-page h1 {
+  text-align: center;
+  color: #2c1a0e;
+  font-size: 2.8rem;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.menu-page h1::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 4px;
+  background: #ef6c00;
+  margin: 10px auto;
+  border-radius: 10px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1400px;
+  margin: auto;
+}

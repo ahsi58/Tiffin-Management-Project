@@ -3,11 +3,9 @@ import "./Navbar.css";
 // import logo from "../../assets/logo.png";
 
 function Navbar() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const currentUser = JSON.parse(
-  localStorage.getItem("currentUser")
-  );
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   const handleLogout = () => {
     localStorage.removeItem("currentUser");
@@ -37,35 +35,26 @@ function Navbar() {
 
         <Link to="/subscription">Subscription</Link>
 
-        {
-          currentUser ? (
-            <div className="user-section">
-
-              <div className="profile-circle">
-                {currentUser.role[0].toUpperCase()}
-              </div>
-
-              <span className="role-text">
-                {currentUser.role}
-              </span>
-
-              <button
-                className="logout-btn"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-
-            </div>
-          ) : (
-            <button
-              className="button-btn"
-              onClick={() => navigate("/login")}
+        {currentUser ? (
+          <div className="user-section">
+            <div
+              className="profile-circle"
+              onClick={() => navigate("/dashboard")}
             >
-              Login / Signup
+              {currentUser.role[0].toUpperCase()}
+            </div>
+
+            {/* <span className="role-text">{currentUser.role}</span> */}
+
+            <button className="logout-btn" onClick={handleLogout}>
+              Logout
             </button>
-          )
-        }
+          </div>
+        ) : (
+          <button className="button-btn" onClick={() => navigate("/login")}>
+            Login / Signup
+          </button>
+        )}
         {/* <Link to="/login">Login / Signup</Link> */}
       </div>
     </nav>

@@ -1,31 +1,166 @@
-.landing-container {
-  height: calc(100vh - 70px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
+/* =========================
+   LANDING CONTAINER
+========================= */
+.landing-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+.back-img {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.45)
+    ),
+    url("/images/tiffinmain.jpg");
+
+  background-size: cover;
+  background-position: center;
+
+  height: 85vh;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+/* HERO TEXT */
+.text {
+  max-width: 600px;
+  padding: 24px;
+  color: white;
+}
+
+.text h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 16px;
+}
+
+.text p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* BUTTON */
+.get-started {
+  height: 50px;
+  width: 160px;
+
+  border: none;
+  border-radius: var(--radius);
+
+  background: var(--primary);
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.get-started:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   FEATURES SECTION
+========================= */
+.features-section {
+  padding: 80px 20px;
   text-align: center;
 }
 
-.back-img{
-  background-image: url("/images/tiffinmain.jpg");
-  background-size: cover;
-  width: 100%;
-  height: 500px;
+.features-grid {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 40px;
 }
 
-.get-started{
-  height: 40px;
-  width: 100px;
-  background-color: #ff8935;
-  border-radius: 7px;
+.feature-card {
+  width: 280px;
+  padding: 24px;
+  border-radius: var(--radius);
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+
+  box-shadow: var(--shadow);
+}
+
+.feature-card h3 {
+  color: var(--primary);
+}
+
+/* =========================
+   HOW IT WORKS
+========================= */
+.how-it-works {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.step {
+  width: 220px;
+}
+
+.step span {
+  display: inline-flex;
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+
+  margin-bottom: 12px;
+}
+
+/* =========================
+   CTA SECTION
+========================= */
+.cta-section {
+  padding: 80px 20px;
+  text-align: center;
+
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    #f39c12
+  );
+
+  color: white;
+}
+
+.cta-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+
   border: none;
-}
+  border-radius: var(--radius);
 
-.text{
-  padding-top: 40px;
-  padding-left: 30px;
-  text-align: left;
-  font-family: 'Times New Roman', Times, serif;
+  background: white;
+  color: var(--primary);
+
+  font-weight: bold;
+  cursor: pointer;
 }

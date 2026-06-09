@@ -1,15 +1,35 @@
+
+/* =========================
+   PAGE WRAPPER
+========================= */
 .subscription-page {
   min-height: 100vh;
-  padding: 40px;
-  background-color: #faf6ef;
+  padding: 80px 20px;
+
+  background: var(--bg);
+  color: var(--text);
 }
 
+/* =========================
+   HEADINGS
+========================= */
 .subscription-page h1 {
   text-align: center;
-  margin-bottom: 40px;
-  color: #2c1a0e;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: var(--text);
 }
 
+.subscription-page h3 {
+  text-align: center;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-bottom: 50px;
+}
+
+/* =========================
+   PLANS CONTAINER
+========================= */
 .plans-container {
   display: flex;
   justify-content: center;
@@ -17,56 +37,110 @@
   flex-wrap: wrap;
 }
 
+/* =========================
+   PLAN CARD (MODERN UI)
+========================= */
 .plan-card {
   width: 320px;
-  background-color: #f7f7f7;
-  border: 3px solid #d8c8b7;
-  border-radius: 25px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+
   padding: 30px;
+
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+
+  display: flex;
+  flex-direction: column;
 }
 
+.plan-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   TITLE
+========================= */
 .plan-card h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #1e1e1e;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--text);
 }
 
+/* =========================
+   PRICE
+========================= */
 .price {
-  font-size: 3rem;
+  font-size: 2.8rem;
   font-weight: bold;
-  color: #ef6c00;
-  margin-bottom: 30px;
+  color: var(--primary);
+
+  margin-bottom: 25px;
 }
 
 .price span {
-  font-size: 1.2rem;
-  color: #7a6b5d;
+  font-size: 1rem;
+  color: var(--text-muted);
 }
 
+/* =========================
+   FEATURES LIST
+========================= */
 .plan-card ul {
   list-style: none;
   padding: 0;
+  margin-bottom: 20px;
 }
 
 .plan-card li {
-  margin: 18px 0;
-  color: #6d6258;
-  font-size: 1.1rem;
+  margin: 14px 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+
+  display: flex;
+  align-items: center;
 }
 
+/* small bullet upgrade */
+.plan-card li::before {
+  content: "✔";
+  color: var(--accent);
+  margin-right: 10px;
+  font-size: 0.9rem;
+}
+
+/* =========================
+   BUTTON
+========================= */
 .plan-card button {
   width: 100%;
-  margin-top: 25px;
+  margin-top: auto;
+
   border: none;
-  background-color: #ef6c00;
+  border-radius: var(--radius);
+
+  background: var(--primary);
   color: white;
-  font-size: 1.1rem;
+
+  font-size: 1rem;
   font-weight: 600;
-  padding: 16px;
-  border-radius: 15px;
+
+  padding: 14px;
+
   cursor: pointer;
+  transition: var(--transition);
 }
 
 .plan-card button:hover {
-  background-color: #d95f00;
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* disabled-like state */
+.plan-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

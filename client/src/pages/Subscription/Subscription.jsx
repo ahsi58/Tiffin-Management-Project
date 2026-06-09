@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../../components/Navbar'
 import "./Subscription.css";
 import { useNavigate } from "react-router-dom";
+import Footer from '../../components/Footer/Footer';
 
 function Subscription() {
 
@@ -39,6 +40,7 @@ function Subscription() {
     <div className="subscription-page">
 
       <h1>Choose Your Plan</h1>
+      <h3>Flexible Subscription Plans pause or cancel anytime</h3>
 
       <div className="plans-container">
 
@@ -59,6 +61,7 @@ function Subscription() {
             </ul>
 
             <button
+  disabled={currentUser?.role === "member"}
   onClick={() => {
     if (!currentUser) {
       navigate("/login");
@@ -71,7 +74,6 @@ function Subscription() {
     }
 
     if (currentUser.role === "member") {
-      alert("You already have a subscription.");
       return;
     }
 
@@ -81,7 +83,7 @@ function Subscription() {
   {!currentUser
     ? "Login to Subscribe"
     : currentUser.role === "member"
-    ? "Subscribed"
+    ? "Already Subscribed"
     : "Subscribe"}
 </button>
 
@@ -91,6 +93,7 @@ function Subscription() {
       </div>
 
     </div>
+    <Footer/>
     </>
   );
 }

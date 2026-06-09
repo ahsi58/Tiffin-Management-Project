@@ -49,7 +49,7 @@ function Login() {
   );
 
   if (foundUser.role === "user") {
-    navigate("/user-dashboard");
+    navigate("/dashboard");
   }
 
   else if (foundUser.role === "member") {
