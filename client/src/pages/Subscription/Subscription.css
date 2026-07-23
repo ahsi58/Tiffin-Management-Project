@@ -1,7 +1,5 @@
 
-/* =========================
-   PAGE WRAPPER
-========================= */
+
 .subscription-page {
   min-height: 100vh;
   padding: 80px 20px;
@@ -10,9 +8,7 @@
   color: var(--text);
 }
 
-/* =========================
-   HEADINGS
-========================= */
+
 .subscription-page h1 {
   text-align: center;
   font-size: 2.5rem;
@@ -27,9 +23,7 @@
   margin-bottom: 50px;
 }
 
-/* =========================
-   PLANS CONTAINER
-========================= */
+
 .plans-container {
   display: flex;
   justify-content: center;
@@ -37,9 +31,7 @@
   flex-wrap: wrap;
 }
 
-/* =========================
-   PLAN CARD (MODERN UI)
-========================= */
+
 .plan-card {
   width: 320px;
 
@@ -61,18 +53,14 @@
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
-/* =========================
-   TITLE
-========================= */
+
 .plan-card h2 {
   font-size: 1.8rem;
   margin-bottom: 15px;
   color: var(--text);
 }
 
-/* =========================
-   PRICE
-========================= */
+
 .price {
   font-size: 2.8rem;
   font-weight: bold;
@@ -86,9 +74,7 @@
   color: var(--text-muted);
 }
 
-/* =========================
-   FEATURES LIST
-========================= */
+
 .plan-card ul {
   list-style: none;
   padding: 0;
@@ -112,9 +98,7 @@
   font-size: 0.9rem;
 }
 
-/* =========================
-   BUTTON
-========================= */
+
 .plan-card button {
   width: 100%;
   margin-top: auto;

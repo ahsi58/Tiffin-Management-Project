@@ -12,6 +12,21 @@ function Navbar() {
     navigate("/");
   };
 
+  const handleProfile = () => {
+    if(currentUser.role == "user"){
+      navigate("/user-dashboard")
+    }
+    else if(currentUser.role == "member"){
+      navigate("/dashboard")
+    }
+    else if(currentUser.role == "vendor"){
+      navigate("/vendor-dashboard")
+    }
+    else{
+      console.log("navigate not ")
+    }
+  }
+
   return (
     <nav className="navbar">
       {/* Left Side */}
@@ -39,7 +54,7 @@ function Navbar() {
           <div className="user-section">
             <div
               className="profile-circle"
-              onClick={() => navigate("/dashboard")}
+              onClick={handleProfile}
             >
               {currentUser.role[0].toUpperCase()}
             </div>

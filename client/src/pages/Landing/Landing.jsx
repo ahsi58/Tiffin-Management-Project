@@ -12,7 +12,7 @@ function Landing() {
 
   <div className="landing-container">
 
-    {/* Hero Section */}
+
     <div className="back-img">
       <div className="text">
         <h1>Fresh Homemade Tiffins Daily</h1>
@@ -48,8 +48,8 @@ function Landing() {
         </div>
 
         <div className="feature-card">
-          <h3>On-Time Delivery</h3>
-          <p>Reliable delivery right to your doorstep.</p>
+          <h3>Reliable Food Source</h3>
+          <p>Reliable food source right to your doorstep.</p>
         </div>
 
       </div>
@@ -77,7 +77,7 @@ function Landing() {
         <div className="step">
           <span>3</span>
           <h3>Enjoy Meals</h3>
-          <p>Get fresh tiffins delivered every day.</p>
+          <p>Get fresh homemade tiffins every day.</p>
         </div>
 
       </div>
