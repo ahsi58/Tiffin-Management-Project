@@ -8,6 +8,8 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import LunchMenu from "./pages/WeeklyMenu/LunchMenu";
 import DinnerMenu from "./pages/WeeklyMenu/DinnerMenu";
+import Vendordashboard from "./pages/Vendordashboard/Vendordashboard";
+import User from "./pages/User/User";
 // import { Route } from "react-router-dom";
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
       <Route path="/login" element={<Login/>} />
       <Route path="/register" element={<Register/>} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/vendor-dashboard" element={<Vendordashboard/>}/>
+      <Route path="/user-dashboard" element={<User/>}/>
     </Routes>
 
     {/* <Landing /> */}

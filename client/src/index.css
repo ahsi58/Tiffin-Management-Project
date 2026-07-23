@@ -221,9 +221,7 @@ code {
   background: var(--code-bg);
 } */
 
-/* =========================
-   RESET
-========================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -237,9 +235,6 @@ html, body {
   scroll-behavior: smooth;
 }
 
-/* =========================
-   LIGHT THEME (DEFAULT)
-========================= */
 :root {
   --primary: #e67e22;
   --primary-dark: #cf711c;
@@ -259,9 +254,6 @@ html, body {
   --transition: 0.25s ease-in-out;
 }
 
-/* =========================
-   DARK THEME
-========================= */
 [data-theme="dark"] {
   --primary: #f39c12;
 
@@ -276,9 +268,6 @@ html, body {
   --shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* =========================
-   GLOBAL BODY
-========================= */
 body {
   background: var(--bg);
   color: var(--text);

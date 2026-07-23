@@ -49,11 +49,11 @@ function Login() {
   );
 
   if (foundUser.role === "user") {
-    navigate("/dashboard");
+    navigate("/user-dashboard");
   }
 
   else if (foundUser.role === "member") {
-    navigate("/member-dashboard");
+    navigate("/dashboard");
   }
 
   else if (foundUser.role === "vendor") {
