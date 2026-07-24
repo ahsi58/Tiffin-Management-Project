@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import "./Dashboard.css";
+import Footer from "../../components/Footer/Footer";
 
 function Dashboard() {
   const currentUser = JSON.parse(
@@ -25,7 +26,7 @@ function Dashboard() {
         <div className="dashboard-header">
           <div>
             <h1>
-              Hey, {currentUser?.username || "User"} 
+              Hey, {currentUser?.username || "Subscriber"} 
             </h1>
 
             <p>
@@ -258,6 +259,7 @@ function Dashboard() {
         )}
 
       </div>
+      <Footer/>
     </>
   );
 }
