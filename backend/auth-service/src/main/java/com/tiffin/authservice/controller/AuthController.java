@@ -57,5 +57,11 @@ public class AuthController {
 
         return ResponseEntity.ok(response);
     }
+    
+    @GetMapping("/internal/user")
+    public ResponseEntity<AuthUserResponse> getUserByEmail(@RequestParam String email) {
+
+        return ResponseEntity.ok(authService.getUserByEmail(email));
+    }
 
 }

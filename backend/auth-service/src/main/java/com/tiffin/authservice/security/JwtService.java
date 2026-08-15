@@ -32,10 +32,8 @@ public class JwtService {
     /**
      * Generate Access Token
      */
-    public String generateAccessToken(String email, Role role) {
-
+    public String generateAccessToken(Long authUserId, String email, Role role) {
         Date now = new Date();
-
         Date expiry = new Date(
                 now.getTime() + jwtProperties.getAccessTokenExpiration()
         );
@@ -43,15 +41,14 @@ public class JwtService {
         return Jwts.builder()
                 .subject(email)
                 .claim("role", role.name())
+                .claim("authUserId", authUserId)
                 .issuedAt(now)
                 .expiration(expiry)
                 .signWith(getSigningKey())
-                .compact();
-    }
-
     /**
      * Generate Refresh Token
      */
+
     public String generateRefreshToken(String email) {
 
         Date now = new Date();
@@ -68,9 +65,7 @@ public class JwtService {
                 .compact();
     }
 
-    /**
-     * Extract all claims.
-     */
+    //Extract all claims.
     public Claims extractAllClaims(String token) {
 
         return Jwts.parser()
@@ -80,41 +75,37 @@ public class JwtService {
                 .getPayload();
     }
 
-    /**
-     * Extract email.
-     */
+    //Extract email.
     public String extractEmail(String token) {
         return extractAllClaims(token).getSubject();
     }
 
-    /**
-     * Extract role.
-     */
+    //Extract role.
     public String extractRole(String token) {
         return extractAllClaims(token)
                 .get("role", String.class);
     }
 
-    /**
-     * Extract expiration.
-     */
+    //Extract expiration.
     public Date extractExpiration(String token) {
         return extractAllClaims(token)
                 .getExpiration();
     }
+    
+    //extract authUserId
+    public Long extractAuthUserId(String token) {
+        Claims claims = extractAllClaims(token);
+        return claims.get("authUserId", Long.class);
+    }
 
-    /**
-     * Check token expiry.
-     */
+    //Check token expiry.
     public boolean isTokenExpired(String token) {
 
         return extractExpiration(token)
                 .before(new Date());
     }
 
-    /**
-     * Validate token.
-     */
+    //Validate token.
     public boolean isTokenValid(String token, String email) {
 
         String extractedEmail = extractEmail(token);

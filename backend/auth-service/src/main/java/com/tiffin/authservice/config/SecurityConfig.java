@@ -42,7 +42,9 @@ public class SecurityConfig {
                             "/auth/register",
                             "/auth/login",
                             "/auth/logout",
-                            "/auth/refresh")
+                            "/auth/refresh",
+                            "/auth/internal/**")
+
                     .permitAll()
                     .anyRequest().authenticated())
             

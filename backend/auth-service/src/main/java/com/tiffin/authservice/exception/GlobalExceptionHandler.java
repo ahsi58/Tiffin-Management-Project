@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.tiffin.authservice.dto.ApiResponse;
 import com.tiffin.authservice.dto.ErrorResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -88,6 +89,19 @@ public class GlobalExceptionHandler {
 	            .body(error);
 	}
 	
+	@ExceptionHandler(UserProfileCreationException.class)
+	public ResponseEntity<ApiResponse> handleUserProfileCreationException(
+	        UserProfileCreationException ex) {
+
+	    ApiResponse response = ApiResponse.builder()
+	            .success(false)
+	            .message(ex.getMessage())
+	            .build();
+
+	    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	            .body(response);
+	}
+	
 	//generic exception handler
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> handleException(
@@ -105,6 +119,7 @@ public class GlobalExceptionHandler {
 	    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 	            .body(error);
 	}
+	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ErrorResponse> handleValidationException(

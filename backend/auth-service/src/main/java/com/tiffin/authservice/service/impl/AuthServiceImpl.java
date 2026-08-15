@@ -8,9 +8,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.tiffin.authservice.client.UserClient;
 import com.tiffin.authservice.config.JwtProperties;
 import com.tiffin.authservice.dto.ApiResponse;
 import com.tiffin.authservice.dto.AuthResponse;
+import com.tiffin.authservice.dto.AuthUserResponse;
 import com.tiffin.authservice.dto.LoginRequest;
 import com.tiffin.authservice.dto.RefreshTokenRequest;
 import com.tiffin.authservice.dto.RegisterRequest;
@@ -21,10 +23,15 @@ import com.tiffin.authservice.exception.EmailAlreadyExistsException;
 import com.tiffin.authservice.exception.InvalidTokenException;
 import com.tiffin.authservice.exception.PasswordMismatchException;
 import com.tiffin.authservice.exception.ResourceNotFoundException;
+import com.tiffin.authservice.exception.UserProfileCreationException;
 import com.tiffin.authservice.repository.CredentialRepository;
 import com.tiffin.authservice.repository.RefreshTokenRepository;
 import com.tiffin.authservice.security.JwtService;
 import com.tiffin.authservice.service.AuthService;
+
+import feign.FeignException;
+
+import com.tiffin.authservice.client.dto.CreateUserRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,9 +47,12 @@ public class AuthServiceImpl implements AuthService {
 	private final JwtService jwtService;
 	
 	private final JwtProperties jwtProperties;
+	
+	private final UserClient userClient;
 
 	private final AuthenticationManager authenticationManager;
 
+	//register user(customer)
     @Override
     public ApiResponse register(RegisterRequest request) {
     	
@@ -65,7 +75,28 @@ public class AuthServiceImpl implements AuthService {
 	    	        .enabled(true)
 	    	        .build();
 	    	
-	    	credentialRepository.save(credential);
+	    	Credential savedCredential = credentialRepository.save(credential);
+	    	
+	    	CreateUserRequest createUserRequest =
+	    	        CreateUserRequest.builder()
+	    	                .authUserId(savedCredential.getId())
+	    	                .firstName(request.getFirstName())
+	    	                .lastName(request.getLastName())
+	    	                .email(request.getEmail())
+	    	                .phoneNumber(request.getPhoneNumber())
+	    	                .build();
+	    	
+	    	try {
+	    	    userClient.createUser(createUserRequest);
+	    	} catch (FeignException ex) {
+
+	    	    credentialRepository.deleteById(savedCredential.getId());
+
+	    	    ex.printStackTrace();   // Temporary
+
+	    	    throw new UserProfileCreationException(
+	    	        "Unable to create user profile. Registration rolled back.");
+	    	}
 	    	
 	    	return ApiResponse.builder()
 	    	        .success(true)
@@ -73,6 +104,7 @@ public class AuthServiceImpl implements AuthService {
 	    	        .build();
     }
 
+    //login method
     @Override
     public AuthResponse login(LoginRequest request) {
     	
@@ -88,7 +120,7 @@ public class AuthServiceImpl implements AuthService {
     		                new ResourceNotFoundException("User not found"));
         
         String accessToken =
-                jwtService.generateAccessToken(credential.getEmail(), credential.getRole());
+                jwtService.generateAccessToken(credential.getId(), credential.getEmail(), credential.getRole());
         
         String refreshToken =
                 jwtService.generateRefreshToken(credential.getEmail());
@@ -112,6 +144,7 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 
+    //method to generate new access token from existing refresh token
     @Override
     public AuthResponse refreshToken(RefreshTokenRequest request) {
 
@@ -142,6 +175,7 @@ public class AuthServiceImpl implements AuthService {
 
         // Generate new tokens
         String newAccessToken = jwtService.generateAccessToken(
+        			credential.getId(),
                 credential.getEmail(),
                 credential.getRole());
 
@@ -183,6 +217,20 @@ public class AuthServiceImpl implements AuthService {
         return ApiResponse.builder()
                 .success(true)
                 .message("Logout successful")
+                .build();
+    }
+    
+    @Override
+    public AuthUserResponse getUserByEmail(String email) {
+
+        Credential credential = credentialRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found with email : " + email));
+
+        return AuthUserResponse.builder()
+                .authUserId(credential.getId())
+                .email(credential.getEmail())
+                .role(credential.getRole())
                 .build();
     }
 }
