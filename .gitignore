@@ -48,4 +48,9 @@ dist-ssr
 .env
 .env.*
 
+venv/
+__pycache__/
+*.pyc
+.idea/
+.vscode/
 Thumbs.db
